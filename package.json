@@ -1,7 +1,7 @@
 {
 
   "engine":{
-    "node": "v20.x"
+    "node": "10.8.3"
   },
   "name": "mojor_project",
   "version": "1.0.0",
