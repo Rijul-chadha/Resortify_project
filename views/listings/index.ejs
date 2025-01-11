@@ -1,27 +1,65 @@
-<%- layout('layouts/boilerplate') %> 
-<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar and Filters</title>
     <style>
-        /* General styles for filters */
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar Styles */
+        nav {
+            display: flex;
+            justify-content: space-evenly; /* Evenly space items across the navbar */
+            align-items: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #007bff; /* Hover color */
+        }
+
+        /* Responsive Navbar Font Size */
+        @media (max-width: 768px) {
+            nav a {
+                font-size: 1rem;
+            }
+        }
+
+        /* Filters Section */
         #filters {
             display: flex;
             justify-content: flex-start;
             gap: 20px;
             padding: 1rem;
-            overflow-x: auto;
+            overflow-x: auto; /* Horizontal scroll on small screens */
             white-space: nowrap;
-            scrollbar-width: thin;
+            scrollbar-width: thin; /* For Firefox */
             margin: 0 auto;
-            max-width: 90%; /* Add spacing based on screen size */
+            max-width: 90%;
         }
 
-        /* Responsive spacing for larger screens */
         @media (min-width: 1200px) {
             #filters {
-                max-width: 80%; /* Adjust width for laptops and larger screens */
+                max-width: 80%; /* Adjust width for larger screens */
             }
         }
 
-        /* Filter item styles */
         .filter {
             text-align: center;
             padding: 4px;
@@ -39,66 +77,60 @@
             margin: 0;
         }
 
-        /* Custom scrollbar styles */
         #filters::-webkit-scrollbar {
             height: 8px;
         }
+
         #filters::-webkit-scrollbar-thumb {
             background-color: #ccc;
             border-radius: 4px;
         }
+
         #filters::-webkit-scrollbar-track {
             background-color: #f1f1f1;
         }
 
-        /* Navbar styles */
-        nav {
+        /* Listings Section */
+        .row {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
             padding: 1rem;
-            background-color: #f8f9fa;
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
         }
 
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-size: 1rem;
-            margin: 0 0.5rem;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Make navbar responsive */
-        @media (max-width: 768px) {
-            nav a {
-                font-size: 0.9rem; /* Reduce font size on smaller screens */
-            }
-
-            nav {
-                justify-content: center; /* Center align for better spacing */
-            }
-        }
-
-        /* Listings section */
         .listing-link {
             text-decoration: none;
             color: inherit;
+            flex: 1 1 calc(33.333% - 1rem); /* Three cards per row on large screens */
+            max-width: calc(33.333% - 1rem);
+        }
+
+        @media (max-width: 768px) {
+            .listing-link {
+                flex: 1 1 calc(50% - 1rem); /* Two cards per row on tablets */
+                max-width: calc(50% - 1rem);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .listing-link {
+                flex: 1 1 calc(100% - 1rem); /* One card per row on small screens */
+                max-width: calc(100% - 1rem);
+            }
         }
 
         .listing-card {
-            margin-bottom: 1rem;
             border: 1px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-img-top {
             width: 100%;
             object-fit: cover;
+            height: 20rem;
         }
 
         .card-body {
@@ -110,14 +142,9 @@
             margin: 0;
         }
     </style>
-
+</head>
+<body>
     <!-- Navbar Section -->
-    <nav>
-        <a href="/">Home</a>
-        <a href="/listings">Listings</a>
-        <a href="/contact">Contact</a>
-        <a href="/about">About</a>
-    </nav>
 
     <!-- Filters Section -->
     <div id="filters">
@@ -164,16 +191,14 @@
     </div>
 
     <!-- Listings Section -->
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <div class="row">
         <% for(let listing of allListings) { %>
             <a href="/listings/<%=listing._id%>" class="listing-link">
-                <div class="card col listing-card">
-                    <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem">
-                    <div class="card-img-overlay"></div>
+                <div class="listing-card">
+                    <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image">
                     <div class="card-body">
                         <p class="card-text">
-                            <b><%= listing.title %></b>
-                            &dollar;<%= listing.price %> / night
+                            <b><%= listing.title %></b> &dollar;<%= listing.price %> / night
                         </p>
                     </div>
                 </div>
@@ -181,3 +206,4 @@
         <% } %>
     </div>
 </body>
+</html>
