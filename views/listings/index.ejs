@@ -4,25 +4,42 @@
         /* General styles */
         #filters {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start; /* Align items in a single row */
             gap: 20px;
+            padding: 1rem;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            white-space: nowrap; /* Prevent items from wrapping */
+            scrollbar-width: thin; /* Adjust scrollbar width */
         }
+
+        /* Filter item styles */
         .filter {
             text-align: center;
             padding: 4px;
-            margin-right: 2rem;
-            margin-top: 2rem;
+            flex: 0 0 auto; /* Prevent shrinking and wrapping */
             opacity: 0.8;
-            flex: 1 1 calc(20% - 2rem); /* Adjusts size flexibly */
-            max-width: 120px; /* Prevents excessive growth */
         }
+
         .filter:hover {
             opacity: 1;
             cursor: pointer;
         }
+
         .filter p {
             font-size: 0.8rem;
+            margin: 0;
+        }
+
+        /* Hide scrollbars for a cleaner look (optional) */
+        #filters::-webkit-scrollbar {
+            height: 8px;
+        }
+        #filters::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+        #filters::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
         }
 
         /* Card container and cards */
@@ -30,107 +47,88 @@
             text-decoration: none;
             color: inherit;
         }
+
         .listing-card {
             margin-bottom: 1rem;
             border: 1px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
         }
+
         .card-img-top {
             width: 100%;
             object-fit: cover;
         }
+
         .card-body {
             padding: 1rem;
         }
+
         .card-text {
             font-size: 1rem;
             margin: 0;
         }
-
-        /* Responsive design */
-        @media screen and (max-width: 768px) {
-            .filter {
-                flex: 1 1 calc(40% - 2rem); /* Adjust for smaller devices */
-                max-width: none;
-            }
-            .card-img-top {
-                height: 15rem; /* Reduce image height on smaller screens */
-            }
-            .card-text {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media screen and (max-width: 576px) {
-            .filter {
-                flex: 1 1 100%; /* Full width for smallest screens */
-                margin-right: 0;
-            }
-            .card-img-top {
-                height: 12rem; /* Further reduce image height */
-            }
-            .card-text {
-                font-size: 0.8rem;
-            }
-        }
     </style>
 
+    <!-- Filters Section -->
     <div id="filters">
         <div class="filter">
-           <div> <i class="fa-solid fa-fire"></i></div>
-           <p>Trending</p>
+            <div> <i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
         </div>
         <div class="filter">
             <div> <i class="fa-solid fa-bed"></i> </div>
             <p>Rooms</p>
-         </div>
-         <div class="filter">
+        </div>
+        <div class="filter">
             <div> <i class="fa-solid fa-mountain-city"></i> </div>
             <p>Iconic cities</p>
-         </div>
-         <div class="filter">
-             <div> <i class="fa-solid fa-mountain-sun"></i> </div>
-             <p>Mountains</p>
-          </div>
-          <div class="filter">
+        </div>
+        <div class="filter">
+            <div> <i class="fa-solid fa-mountain-sun"></i> </div>
+            <p>Mountains</p>
+        </div>
+        <div class="filter">
             <div> <i class="fa-brands fa-fort-awesome"></i></div>
             <p>Castles</p>
-         </div>
-         <div class="filter">
-             <div> <i class="fa-solid fa-water-ladder"></i> </div>
-             <p>Amazing pools</p>
-          </div>
-          <div class="filter">
+        </div>
+        <div class="filter">
+            <div> <i class="fa-solid fa-water-ladder"></i> </div>
+            <p>Amazing pools</p>
+        </div>
+        <div class="filter">
             <div> <i class="fa-solid fa-campground"></i> </div>
             <p>Camping</p>
-         </div>
-         <div class="filter">
-           <div> <i class="fa-solid fa-tractor"></i> </div>
-           <p>Farms</p>
+        </div>
+        <div class="filter">
+            <div> <i class="fa-solid fa-tractor"></i> </div>
+            <p>Farms</p>
         </div>
         <div class="filter">
             <div> <i class="fa-solid fa-igloo"></i> </div>
             <p>Arctic</p>
-         </div>
-         <div class="filter">
+        </div>
+        <div class="filter">
             <div> <i class="fa-solid fa-ship"></i> </div>
             <p>Boats</p>
-         </div>
+        </div>
     </div>
 
+    <!-- Listings Section -->
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
         <% for(let listing of allListings) { %>
             <a href="/listings/<%=listing._id%>" class="listing-link">
-            <div class="card col listing-card">
-                <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem">
-                <div class="card-img-overlay"></div>
-                <div class="card-body">
-                  <p class="card-text">
-                    <b><%= listing.title %></b>
-                    &dollar;<%= listing.price %> / night</p>
+                <div class="card col listing-card">
+                    <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b><%= listing.title %></b>
+                            &dollar;<%= listing.price %> / night
+                        </p>
+                    </div>
                 </div>
-              </div>
-              <% } %>
+            </a>
+        <% } %>
     </div>
 </body>
