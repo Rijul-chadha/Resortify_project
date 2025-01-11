@@ -1,22 +1,31 @@
 <%- layout('layouts/boilerplate') %> 
 <body>
     <style>
-        /* General styles */
+        /* General styles for filters */
         #filters {
             display: flex;
-            justify-content: flex-start; /* Align items in a single row */
+            justify-content: flex-start;
             gap: 20px;
             padding: 1rem;
-            overflow-x: auto; /* Enable horizontal scrolling */
-            white-space: nowrap; /* Prevent items from wrapping */
-            scrollbar-width: thin; /* Adjust scrollbar width */
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: thin;
+            margin: 0 auto;
+            max-width: 90%; /* Add spacing based on screen size */
+        }
+
+        /* Responsive spacing for larger screens */
+        @media (min-width: 1200px) {
+            #filters {
+                max-width: 80%; /* Adjust width for laptops and larger screens */
+            }
         }
 
         /* Filter item styles */
         .filter {
             text-align: center;
             padding: 4px;
-            flex: 0 0 auto; /* Prevent shrinking and wrapping */
+            flex: 0 0 auto;
             opacity: 0.8;
         }
 
@@ -30,7 +39,7 @@
             margin: 0;
         }
 
-        /* Hide scrollbars for a cleaner look (optional) */
+        /* Custom scrollbar styles */
         #filters::-webkit-scrollbar {
             height: 8px;
         }
@@ -42,7 +51,39 @@
             background-color: #f1f1f1;
         }
 
-        /* Card container and cards */
+        /* Navbar styles */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            margin: 0 0.5rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Make navbar responsive */
+        @media (max-width: 768px) {
+            nav a {
+                font-size: 0.9rem; /* Reduce font size on smaller screens */
+            }
+
+            nav {
+                justify-content: center; /* Center align for better spacing */
+            }
+        }
+
+        /* Listings section */
         .listing-link {
             text-decoration: none;
             color: inherit;
@@ -69,6 +110,14 @@
             margin: 0;
         }
     </style>
+
+    <!-- Navbar Section -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/listings">Listings</a>
+        <a href="/contact">Contact</a>
+        <a href="/about">About</a>
+    </nav>
 
     <!-- Filters Section -->
     <div id="filters">
