@@ -1,209 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Navbar and Filters</title>
+<%- layout('layouts/boilerplate') %> 
+<body>
+    
     <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Navbar Styles */
-        nav {
-            display: flex;
-            justify-content: space-evenly; /* Evenly space items across the navbar */
-            align-items: center;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-size: 1.2rem;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #007bff; /* Hover color */
-        }
-
-        /* Responsive Navbar Font Size */
-        @media (max-width: 768px) {
-            nav a {
-                font-size: 1rem;
-            }
-        }
-
-        /* Filters Section */
-        #filters {
-            display: flex;
-            justify-content: flex-start;
-            gap: 20px;
-            padding: 1rem;
-            overflow-x: auto; /* Horizontal scroll on small screens */
-            white-space: nowrap;
-            scrollbar-width: thin; /* For Firefox */
-            margin: 0 auto;
-            max-width: 90%;
-        }
-
-        @media (min-width: 1200px) {
-            #filters {
-                max-width: 80%; /* Adjust width for larger screens */
-            }
-        }
-
-        .filter {
-            text-align: center;
-            padding: 4px;
-            flex: 0 0 auto;
-            opacity: 0.8;
-        }
-
-        .filter:hover {
-            opacity: 1;
-            cursor: pointer;
-        }
-
-        .filter p {
-            font-size: 0.8rem;
-            margin: 0;
-        }
-
-        #filters::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        #filters::-webkit-scrollbar-thumb {
-            background-color: #ccc;
-            border-radius: 4px;
-        }
-
-        #filters::-webkit-scrollbar-track {
-            background-color: #f1f1f1;
-        }
-
-        /* Listings Section */
-        .row {
+        #filters{
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            padding: 1rem;
+            justify-content: center;
+            gap: 20px;  
         }
-
-        .listing-link {
-            text-decoration: none;
-            color: inherit;
-            flex: 1 1 calc(33.333% - 1rem); /* Three cards per row on large screens */
-            max-width: calc(33.333% - 1rem);
+        .filter{
+            text-align: center;
+            padding: 4px;
+            margin-right: 2rem;
+            margin-top: 2rem;
+            opacity: 0.8;
         }
-
-        @media (max-width: 768px) {
-            .listing-link {
-                flex: 1 1 calc(50% - 1rem); /* Two cards per row on tablets */
-                max-width: calc(50% - 1rem);
-            }
+        .filter:hover{
+            opacity: 2;
+            cursor: pointer;
         }
-
-        @media (max-width: 576px) {
-            .listing-link {
-                flex: 1 1 calc(100% - 1rem); /* One card per row on small screens */
-                max-width: calc(100% - 1rem);
-            }
-        }
-
-        .listing-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-img-top {
-            width: 100%;
-            object-fit: cover;
-            height: 20rem;
-        }
-
-        .card-body {
-            padding: 1rem;
-        }
-
-        .card-text {
-            font-size: 1rem;
-            margin: 0;
+        .filter p{
+            font-size: 0.8rem;
         }
     </style>
-</head>
-<body>
-    <!-- Navbar Section -->
-
-    <!-- Filters Section -->
     <div id="filters">
         <div class="filter">
-            <div> <i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
+           <div> <i class="fa-solid fa-fire"></i></div>
+           <p> Trending</p>
         </div>
         <div class="filter">
             <div> <i class="fa-solid fa-bed"></i> </div>
-            <p>Rooms</p>
-        </div>
-        <div class="filter">
+            <p> Rooms</p>
+         </div>
+         <div class="filter">
             <div> <i class="fa-solid fa-mountain-city"></i> </div>
-            <p>Iconic cities</p>
-        </div>
-        <div class="filter">
-            <div> <i class="fa-solid fa-mountain-sun"></i> </div>
-            <p>Mountains</p>
-        </div>
-        <div class="filter">
+            <p> Iconic cities</p>
+         </div>
+         <div class="filter">
+             <div> <i class="fa-solid fa-mountain-sun"></i> </div>
+             <p> Mountains </p>
+          </div>
+          <div class="filter">
             <div> <i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-        </div>
-        <div class="filter">
-            <div> <i class="fa-solid fa-water-ladder"></i> </div>
-            <p>Amazing pools</p>
-        </div>
-        <div class="filter">
+            <p> Castles</p>
+         </div>
+         <div class="filter">
+             <div> <i class="fa-solid fa-water-ladder"></i> </div>
+             <p> Amazing pools</p>
+          </div>
+          <div class="filter">
             <div> <i class="fa-solid fa-campground"></i> </div>
-            <p>Camping</p>
-        </div>
-        <div class="filter">
-            <div> <i class="fa-solid fa-tractor"></i> </div>
-            <p>Farms</p>
+            <p> Camping </p>
+         </div>
+         <div class="filter">
+           <div> <i class="fa-solid fa-tractor"></i> </div>
+           <p> Farms </p>
         </div>
         <div class="filter">
             <div> <i class="fa-solid fa-igloo"></i> </div>
-            <p>Arctic</p>
-        </div>
-        <div class="filter">
+            <p>Arctic </p>
+         </div>
+         <div class="filter">
             <div> <i class="fa-solid fa-ship"></i> </div>
-            <p>Boats</p>
-        </div>
-    </div>
+            <p> Boats </p>
+         </div>
+        
+ 
 
-    <!-- Listings Section -->
-    <div class="row">
+    </div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
         <% for(let listing of allListings) { %>
             <a href="/listings/<%=listing._id%>" class="listing-link">
-                <div class="listing-card">
-                    <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image">
-                    <div class="card-body">
-                        <p class="card-text">
-                            <b><%= listing.title %></b> &dollar;<%= listing.price %> / night
-                        </p>
-                    </div>
+            <div class="card col listing-card" >
+                <img src="<%=listing.image.url%>" class="card-img-top" alt= "listing_image" style="height: 20rem">
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                  <p class="card-text">
+                    <b><%= listing.title %> </b>
+                    &dollar;<%=  listing.price %> / night</p>
                 </div>
-            </a>
-        <% } %>
-    </div>
+              </div>
+              <% } %>
+    </div>    
 </body>
-</html>
